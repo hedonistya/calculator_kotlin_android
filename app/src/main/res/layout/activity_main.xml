@@ -145,6 +145,7 @@
             style="@style/buttonNumber"
             android:text="0"/>
 
+        <!-- layout_weight Распределение ширины -->
         <Button
             style="@style/buttonNumber"
             android:layout_weight="2"

@@ -7,9 +7,13 @@ import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    // val - переменная только для чтения
+    // var - изменяемая переменная
     private var canAddOperation = false
     private var canAddDecimal = true
 
+    //override переопределение свойства
+    //super обращение к реализации базового класса из производного
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         if (view is Button) {
             if (view.text == ".") {
                 if (canAddDecimal) {
+                    //append что-то добавить
                     workingsTV.append(view.text)
                 }
 
@@ -43,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         val length = workingsTV.length()
 
         if (length > 0) {
+            //subsequence обновляет длину строки
             workingsTV.text = workingsTV.text.subSequence(0, length - 1)
         }
     }
@@ -75,8 +81,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addSubtractCalculate(passedList: MutableList<Any>): Float {
+        //as проверяет типы родителя и потомка
         var result = passedList[0] as Float
 
+        //indices возвращает диапазон символов в массиве
         for (i in passedList.indices) {
             if (passedList[i] is Char && i != passedList.lastIndex) {
                 val operator = passedList[i]
@@ -96,6 +104,7 @@ class MainActivity : AppCompatActivity() {
     private fun timesDivisionCalculate(passedList: MutableList<Any>): MutableList<Any> {
         var list = passedList
 
+        //contains проверяет указанный элемент в списке
         while (list.contains('x') || list.contains('/')) {
             list = calcTimesDiv(list)
         }
@@ -104,6 +113,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calcTimesDiv(passedList: MutableList<Any>): MutableList<Any> {
+        //mutableListOf возвращает новый пустой mutableList
+        //mutableList общий упорядоченный набор элементов
         val newList = mutableListOf<Any>()
         var restartIndex = passedList.size
 
